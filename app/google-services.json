@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "249270252615",
+    "project_id": "traillo-18d49",
+    "storage_bucket": "traillo-18d49.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:249270252615:android:6df1bcc51634ac31b52d62",
+        "android_client_info": {
+          "package_name": "com.prakhar.traillo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "249270252615-ef3ofpl2f7q453fgn35a4ebud5ummirh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfhhD3X7U4AONtiWYiNYdUZqB02n2kPhs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "249270252615-ef3ofpl2f7q453fgn35a4ebud5ummirh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
