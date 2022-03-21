@@ -187,6 +187,7 @@ class MyProfileActivity : BaseActivity() {
         }
     }
 
+    //Getting file extension from uri
     private fun getFileExtension(uri: Uri?): String? {
        val  mimeType =  MimeTypeMap.getSingleton().getExtensionFromMimeType(contentResolver.getType(uri!!))
         Log.i("Extension", "$mimeType")
