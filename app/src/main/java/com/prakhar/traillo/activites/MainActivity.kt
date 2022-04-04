@@ -1,7 +1,10 @@
 package com.prakhar.traillo.activites
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.util.Log.e
 import android.view.MenuItem
 import androidx.core.view.GravityCompat
 import com.bumptech.glide.Glide
@@ -14,7 +17,12 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.nav_header_main.*
 
-class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener{
+class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
+
+    companion object {
+        const val MY_PROFILE_REQUEST_CODE: Int = 11
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -26,7 +34,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         FirestoreClass().loadUserData(this)
     }
 
-    private fun setUpActionBar(){
+    private fun setUpActionBar() {
         setSupportActionBar(toolbar_main_activity)
         toolbar_main_activity.setNavigationIcon(R.drawable.ic_action_navigation_menu)
 
@@ -35,8 +43,8 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         }
     }
 
-    private fun toggleDrawer(){
-        if(drawer_layout.isDrawerOpen(GravityCompat.START)){
+    private fun toggleDrawer() {
+        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)
         } else {
             drawer_layout.openDrawer(GravityCompat.START)
@@ -44,14 +52,14 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     }
 
     override fun onBackPressed() {
-        if(drawer_layout.isDrawerOpen(GravityCompat.START)){
+        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)
         } else {
             doubleBackToExit()
         }
     }
-    
-    fun updateNavigationUserDetails(user: User){
+
+    fun updateNavigationUserDetails(user: User) {
         Glide
             .with(this)
             .load(user.image)
@@ -62,10 +70,22 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         tv_username.text = user.name
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(resultCode == Activity.RESULT_OK && requestCode == MY_PROFILE_REQUEST_CODE){
+            FirestoreClass().loadUserData(this)
+        }else {
+            e("Cancelled", "Cancelled")
+        }
+    }
+
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
+        when (item.itemId) {
             R.id.nav_my_profile -> {
-                startActivity(Intent(this, MyProfileActivity::class.java))
+                startActivityForResult(
+                    Intent(this, MyProfileActivity::class.java),
+                    MY_PROFILE_REQUEST_CODE
+                )
             }
 
             R.id.nav_sign_out -> {

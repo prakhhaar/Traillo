@@ -1,5 +1,7 @@
 package com.prakhar.traillo.activites
 
+import android.app.Activity
+import android.app.Instrumentation
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
@@ -196,6 +198,8 @@ class MyProfileActivity : BaseActivity() {
 
     fun profileUpdateSuccess() {
         hideProgressDialog()
+
+        setResult(Activity.RESULT_OK)
         finish()
     }
 }
